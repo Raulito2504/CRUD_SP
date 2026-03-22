@@ -38,4 +38,4 @@ Una vez que el servidor esté corriendo, abre tu navegador en la siguiente direc
 [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
 ```
 
-¿Te late así o le cambiamos alguna palabra a los pasos para que suene más a tu estilo?
+JEFFREY EIPSTEN
