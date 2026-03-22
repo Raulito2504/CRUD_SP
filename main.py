@@ -4,10 +4,8 @@ from fastapi.responses import JSONResponse
 from contextlib import asynccontextmanager
 import logging
 import os
-import pyodbc
-from dotenv import load_dotenv
 
-load_dotenv()
+from db.connection import probar_conexion
 
 # ─────────────────────────────────────────
 # LOGGING
@@ -22,30 +20,13 @@ logger = logging.getLogger(__name__)
 # ─────────────────────────────────────────
 # LIFESPAN (reemplaza @app.on_event deprecated)
 # ─────────────────────────────────────────
-def _probar_conexion() -> bool:
-    """Intenta conectarse a SQL Server usando las variables del .env."""
-    try:
-        pwd = os.getenv('DB_PASS', '')
-        cadena = (
-            f"DRIVER={{ODBC Driver 17 for SQL Server}};"
-            f"SERVER={os.getenv('DB_SERVER')};"
-            f"DATABASE={os.getenv('DB_NAME')};"
-            f"UID={os.getenv('DB_USER')};"
-            f"PWD={{{pwd}}}"   # las llaves {} escapan caracteres especiales como ; en ODBC
-        )
-        con = pyodbc.connect(cadena, timeout=5)
-        con.close()
-        return True
-    except Exception as e:
-        logger.error(f"Error de conexión a SQL Server: {e}")
-        return False
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # ── STARTUP ──
     logger.info("Iniciando aplicación...")
-    if _probar_conexion():
+    if probar_conexion():
         logger.info("GG Conexión a SQL Server exitosa.")
     else:
         logger.warning("FF No se pudo conectar a SQL Server. Revisa tu .env.")
@@ -112,7 +93,7 @@ def health_check():
 @app.get("/db-test", tags=["Status"])
 def db_test():
 
-    if _probar_conexion():
+    if probar_conexion():
         return {
             "status": "ok",
             "message": "Conexión a SQL Server exitosa V",
