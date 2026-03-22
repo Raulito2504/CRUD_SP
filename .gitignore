@@ -2,6 +2,7 @@
 .venv/
 venv/
 env/
+database/
 
 # Archivos temporales y caché de Python
 __pycache__/
