@@ -73,10 +73,11 @@ async def global_exception_handler(request, exc):
 
 
 # ─────────────────────────────────────────
-# ROUTERS  →  agrega aquí tus módulos
+# ROUTERS
 # ─────────────────────────────────────────
-# from app.api.routes import items
-# app.include_router(items.router, prefix="/api/v1/items", tags=["Items"])
+from api.routes import clientes
+
+app.include_router(clientes.router, prefix="/api/v1")
 
 
 # ─────────────────────────────────────────
