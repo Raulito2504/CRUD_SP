@@ -3,7 +3,7 @@
 venv/
 env/
 database/
-
+docs/
 # Archivos temporales y caché de Python
 __pycache__/
 *.pyc
