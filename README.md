@@ -35,7 +35,7 @@ uvicorn main:app --reload
 
 Una vez que el servidor esté corriendo, abre tu navegador en la siguiente dirección para ver la documentación interactiva:
 
-[http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+(http://127.0.0.1:8000/docs)
 ```
 
 JEFFREY EIPSTEN
